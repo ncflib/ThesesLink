@@ -1,12 +1,12 @@
 # Putting Local Metadata to Strategic Use: Visualizing 50 Years of Theses Metadata
 
-# Hosting
+## Hosting
 
 Theses dashboard uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend.
 To host the dashboard, any simple webhost with Mysql compability is enough. Python script is used to scrape theses data from
 the original digital collection website and can be run in any machine that Python is installed.
 
-# Building
+## Building
 
 Anyone can build the theses dashboard website using the files in this repository can following these instructions :
 
