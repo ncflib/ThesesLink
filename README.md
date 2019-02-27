@@ -1,10 +1,12 @@
 # Putting Local Metadata to Strategic Use: Visualizing 50 Years of Theses Metadata
 
-## Hosting
+## How is it built ?
 
-Theses dashboard uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend.
-To host the dashboard, any simple webhost with Mysql compability is enough. Python script is used to scrape theses data from
-the original digital collection website and can be run in any machine that Python is installed.
+Theses dashboard uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend. D3.js is a powerful Javascript library that brings data to life using HTML, SVG, and CSS and heavily used in the simulation page. Python script is used to scrape theses data from the original digital collection website ( http://ncf.sobek.ufl.edu/theses ) and can be run in any machine that Python is installed.
+
+## What are we visualizing ?
+
+Theses dashboard visualizes the relationship between divisions, AOCs ( majors ) and theses. It is helpful to see theses data in AOC level to 
 
 ## Building
 
