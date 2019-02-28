@@ -1,12 +1,21 @@
-# Putting Local Metadata to Strategic Use: Visualizing 50 Years of Theses Metadata
+# ThesisLink #
 
-## How is it built ?
-
-Theses dashboard uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend. D3.js is a powerful Javascript library that brings data to life using HTML, SVG, and CSS and heavily used in the simulation page. Python script is used to scrape theses data from the original digital collection website ( http://ncf.sobek.ufl.edu/theses ) and can be run in any machine that Python is installed.
+ThesisLink is a web application that visualizes over 50 years of metadata from undergraduate theses by New College of Florida students. It presents users with an alternative: to view undergraduate theses as objects that are associated to each other via what we call intellectual links.
 
 ## What are we visualizing ?
 
-Theses dashboard visualizes the relationship between divisions, AOCs ( majors ) and theses. It is helpful to see theses data in AOC level to 
+ThesisLink visualizes the relationship between theses, divisions and AOCs ( majors ). It is helpful to understand the relationship between difference AOCs and discover multidisciplinary ideas. You can search or click on an AOC, and see all the theses in this AOC with their related AOCs. You can also target specific AOCs ( e. g. Computer Science, Economics, Political Science ) and see all theses that are related to those AOCs. 
+
+![Screenshot](screenshot1.png)
+
+## What are the limitations ?
+
+There were a lot of "small AOCs" that are not actually considered as AOCs but maybe topics added in the data. When showing AOCs, we had to limitate the number of AOCs by eliminating the ones that have less than 10 theses. This gave us a clean list of AOCs to list under divisions.
+
+## How is it built ?
+
+**ThesisLink** uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend. D3.js is a powerful Javascript library that brings data to life using HTML, SVG, and CSS and heavily used in the simulation page. Python script is used to scrape theses data from the original digital collection website ( http://ncf.sobek.ufl.edu/theses ) and can be run in any machine that Python is installed.
+
 
 ## Building
 
