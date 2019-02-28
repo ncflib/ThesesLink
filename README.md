@@ -6,7 +6,7 @@ ThesisLink is a web application that visualizes over 50 years of metadata from u
 
 ThesisLink visualizes the relationship between theses, divisions and AOCs ( majors ). It is helpful to understand the relationship between difference AOCs and discover multidisciplinary ideas. You can search or click on an AOC, and see all the theses in this AOC with their related AOCs. You can also target specific AOCs ( e. g. Computer Science, Economics, Political Science ) and see all theses that are related to those AOCs. 
 
-![Screenshot](screenshot1.png)
+![Screenshot](screenshot.png)
 
 ## What are the limitations ?
 
