@@ -1,7 +1,7 @@
 <?php
 include("config.php");
 $id = strip_tags($_GET['id']);
-$veri = mysql_fetch_assoc(mysql_query("SELECT * FROM theses WHERE id = '$id'"));
+$veri = $db->query("SELECT * FROM theses WHERE id = '$id'")->fetch(PDO::FETCH_ASSOC);
 ?>
 <div height="500" style="height:350px; overflow: scroll;">
 <table class="table table-dark">

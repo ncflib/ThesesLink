@@ -1,6 +1,7 @@
 var radius = [30, 10, 4, 10];
-var colors = ["#9A2D39", "#486b00", "#2d399a"];
+var colors = ["#0094e0", "#18c97e", "#CC54B3"];
 var clicked = 0;
+var states = []; 
 // humanities, natural sciences, social sciences.
 var currentState = [0, 0, 0, 0, 0];
 updateDivision(3);
@@ -12,7 +13,6 @@ $('#multi').change(function() {
         multivalue = 0;
     }
 
-
     if (currentState[0] == 1) {
         updateAoc(currentState[1], currentState[2], currentState[3], $("#multi").prop('checked'));
     }
@@ -22,7 +22,15 @@ $('#multi').change(function() {
 });
 
 $("#searchAoc").submit(function(event) {
+    if( $("#search").val().length > 2) {
     updateSearch($("#search").val(), 1900, 2020, $("#multi").prop('checked'));
+    } 
+    event.preventDefault();
+});
+$('#doSearch').click(function() {
+    if( $("#search").val().length > 2) {
+    updateSearch($("#search").val(), 1900, 2020, $("#multi").prop('checked'));
+    } 
     event.preventDefault();
 });
 $('#gobackList').click(function() {
@@ -32,11 +40,28 @@ $('#gobackList').click(function() {
     $('#gobackList').hide();
 });
 $('#divisionText').click(function() {
-    updateDivision(3);
-    $("#category").html("All Divisions");
-    $("#nodeTitle").html("List of AOCs");
+    // Take the latest state from the list
+    console.log(states); 
+    states.pop(); 
+    latestState = states[states.length-1][0];
+    console.log(latestState)
+    states.pop();
+    if (latestState[0] == 0) { 
+        updateDivision(latestState[1]);
+        $("#divCharts").html();
+        $("#category").html("All Divisions");
+    }
+    if (latestState[0] == 1) {
+        updateAoc(latestState[1], latestState[2], latestState[3], latestState[4]);
+    }
+    if (latestState[0] == 2) {
+        updateSearch(latestState[1], latestState[2], latestState[3], latestState[4]);
+    }
+    
+    if(states.length == 1) {
     $('#gobackList').hide();
-    $("#divCharts").html('<canvas id="myChart" height="150"></canvas><br /><br /><canvas id="lineChart" height="150"></canvas>');
+    }
+    $('#detailedName').html("&nbsp;");
 });
 
 $(document).ready(function() {
@@ -52,6 +77,7 @@ function goBackAoc() {
         type: "POST",
         success: function(msg2) {
             $("#divCharts").html(msg2);
+            $("#category").html(currentState[1]);
         },
             contentType: "application/x-www-form-urlencoded;charset=UTF-8",
         });
@@ -72,7 +98,9 @@ function getDetail(id) {
 
 
 }
-
+function addState(state) {
+    states.push(state);
+}
 function updateDivision(group) {
 
     nodes_data2 = new Array();
@@ -88,9 +116,11 @@ function updateDivision(group) {
             if (group != 3) {
                 $("#divisionText").show();
                 currentState = [0, group, 0, 0, 0];
+                addState([currentState]);
             } else {
                 $("#divisionText").hide();
                 currentState = [0, group, 0, 0, 0];
+                addState([currentState]);
             }
         },
         dataType: "json"
@@ -122,6 +152,7 @@ function updateAoc(group, year, year2, multivalue) {
                     links_data2 = msg[1];
                     drawGraph(nodes_data2, links_data2,1);
                     currentState = [1, group, year, year2, multivalue];
+                    addState([currentState]);
                     $("#divisionText").show();
                     $("#category").html(group);
                     $("#nodeTitle").html("List of theses");
@@ -161,6 +192,7 @@ function updateSearch(group, year, year2, multivalue) {
                     $("#divisionText").show();
                     $("#category").html("Search: " + group);
                     currentState = [2, group, year, year2, multivalue];
+                    addState([currentState]);
                     $("#nodeTitle").html("List of theses");
                     $("#divCharts").html(msg2);
                     $("#map").show();
@@ -363,7 +395,7 @@ function drawGraph(nodes_data, links_data, currents) {
 
 
     /** Functions **/
-
+ 
     //Function to choose what color circle we have
     //Let's return blue for males and red for females
     //Function to choose the line colour and thickness 
@@ -372,7 +404,7 @@ function drawGraph(nodes_data, links_data, currents) {
     function linkColour(d) {
         if (d.target == "Natural Sciences") {
             return "red";
-        }
+        } 
     }
 
 

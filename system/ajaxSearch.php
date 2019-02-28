@@ -13,11 +13,11 @@ $get_year2 = strip_tags($_GET['year2']);
 $divisions["Humanities"] = 0;
 $divisions["Natural Sciences"] = 1;
 $divisions["Social Sciences"] = 2;
-$query = mysql_query("SELECT thesis FROM aocs WHERE aoc LIKE '%" . $get_aocname . "%' ");
+$query = $db->query("SELECT thesis FROM aocs WHERE aoc LIKE '%" . $get_aocname . "%' ", PDO::FETCH_ASSOC);
 
-while ($data = mysql_fetch_assoc($query))
+foreach($query as $data)
 {
-	$veri = mysql_fetch_assoc(mysql_query("SELECT * FROM theses WHERE id = '" . $data['thesis'] . "'"));
+	$veri = $db->query("SELECT * FROM theses WHERE id = '" . $data['thesis'] . "'")->fetch(PDO::FETCH_ASSOC);
 
 	// TAKE ALL THE AOCS ASSOCIATED WITH THIS THESIS, CREATE LINKS AND THESIS NODE
 
@@ -34,8 +34,8 @@ while ($data = mysql_fetch_assoc($query))
 			$title = $title . "...";
 		}
 
-		$querynew = mysql_query("SELECT aoc FROM aocs WHERE thesis = '" . $data['thesis'] . "'");
-		$querynewsize = mysql_num_rows($querynew);
+		$querynew = $db->query("SELECT aoc FROM aocs WHERE thesis = '" . $data['thesis'] . "'", PDO::FETCH_ASSOC);
+		$querynewsize = $querynew -> rowCount();
 		if (strip_tags($_GET['multi']) == 1)
 		{
 			$limiter = 1;
@@ -47,7 +47,7 @@ while ($data = mysql_fetch_assoc($query))
 
 		if ($querynewsize > $limiter)
 		{
-			while ($verinew = mysql_fetch_assoc($querynew))
+			foreach($querynew as $verinew)
 			{
 				if ($aocarray[$verinew['aoc']] != "")
 				{
@@ -80,7 +80,7 @@ if ($size > 0)
 {
 	for ($a = 0; $a < $size; $a++)
 	{
-		$veri = mysql_fetch_assoc(mysql_query("SELECT * FROM aocs WHERE aoc = '" . mysql_real_escape_string($keys[$a]) . "'"));
+		$veri = $db->query("SELECT * FROM aocs WHERE aoc = '{$keys[$a]}'")->fetch(PDO::FETCH_ASSOC);
 		if ($get_aocname == $keys[$a])
 		{
 			$names.= '{"name": "' . $keys[$a] . '", "title": "", "type": "1", "group": "' . $veri['division'] . '", "radius": 50, "id" : ' . $i . '},';

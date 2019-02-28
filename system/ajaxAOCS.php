@@ -1,6 +1,5 @@
 <?php
 include ("config.php");
-
 $i = 0;
 $old = array();
 $aocarray = array();
@@ -12,12 +11,20 @@ $get_year = strip_tags($_GET['year']);
 $get_year2 = strip_tags($_GET['year2']);
 $divisions["Humanities"] = 0;
 $divisions["Natural Sciences"] = 1;
+$search = $_GET['search'];
 $divisions["Social Sciences"] = 2;
-$query = mysql_query("SELECT thesis FROM aocs WHERE aoc = '$get_aocname'");
-
-while ($data = mysql_fetch_assoc($query))
+$cachedosyasi = "cache/".md5($_GET['id'].$get_aocname.$get_multi.$get_year.$get_year2.$search.$_GET['multi']."ajaxAOCS");
+if (file_exists($cachedosyasi)) {
+include($cachedosyasi);
+exit;
+}
+ob_start();
+$query = $db->prepare("SELECT thesis FROM aocs WHERE aoc = ?");  
+$query->execute(array($get_aocname));  
+$query= $query->fetchAll();
+foreach($query as $data)
 {
-	$veri = mysql_fetch_assoc(mysql_query("SELECT * FROM theses WHERE id = '" . $data['thesis'] . "'"));
+	$veri = $db -> query("SELECT * FROM theses WHERE id = '" . $data['thesis'] . "'")->fetch(PDO::FETCH_ASSOC);
 
 	// TAKE ALL THE AOCS ASSOCIATED WITH THIS THESIS, CREATE LINKS AND THESIS NODE
 
@@ -34,8 +41,8 @@ while ($data = mysql_fetch_assoc($query))
 			$title = $title . "...";
 		}
 
-		$querynew = mysql_query("SELECT aoc FROM aocs WHERE thesis = '" . $data['thesis'] . "'");
-		$querynewsize = mysql_num_rows($querynew);
+		$querynew = $db->query("SELECT aoc FROM aocs WHERE thesis = '" . $data['thesis'] . "'", PDO::FETCH_ASSOC);
+		$querynewsize = $querynew->rowCount();
 		if ($get_multi == 1)
 		{
 			$limiter = 1;
@@ -47,7 +54,7 @@ while ($data = mysql_fetch_assoc($query))
 
 		if ($querynewsize > $limiter)
 		{
-			while ($verinew = mysql_fetch_assoc($querynew))
+			foreach($querynew as $verinew)
 			{
 				if ($aocarray[$verinew['aoc']] != "")
 				{
@@ -80,14 +87,16 @@ if ($size > 0)
 {
 	for ($a = 0; $a < $size; $a++)
 	{
-		$veri = mysql_fetch_assoc(mysql_query("SELECT division FROM aocs WHERE aoc = '" . mysql_real_escape_string($keys[$a]) . "'"));
+		$query = $db->prepare("SELECT division FROM aocs WHERE aoc =?");  
+		$query->execute(array($keys[$a]));  
+		$veri  = $query->fetch(PDO::FETCH_ASSOC);
 		if ($get_aocname == $keys[$a])
 		{
 			$names.= '{"name": "' . $keys[$a] . '", "title": "", "type": "1", "group": "' . $veri['division'] . '", "radius": 50, "id" : ' . $i . '},';
 		}
 		else
 		{
-			$names.= '{"name": "' . $keys[$a] . '", "title": "", "type": "1", "group": "' . $veri['division'] . '", "radius": ' . min($values[$a] * 10, 50) . ', "id" : ' . $i . '},';
+			$names.= '{"name": "' . $keys[$a] . '", "title": "", "type": "1", "group": "' . $veri['division'] . '", "radius": ' . min($values[$a] * 10, 60) . ', "id" : ' . $i . '},';
 		}
 
 		$i++;
@@ -99,4 +108,8 @@ echo substr($names, 0, -1);
 echo "],[";
 echo substr($sources, 0, -1);
 echo "] ]";
+$ch = fopen($cachedosyasi, 'w');
+fwrite($ch, ob_get_contents());
+fclose($ch);
+ob_end_flush();
 ?>

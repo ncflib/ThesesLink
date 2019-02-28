@@ -6,9 +6,9 @@ var config = {
     labels: ["Humanities","Natural Sciences","Social Sciences"],
     datasets: [{
       backgroundColor: [
-        "#2ecc71",
-        "#3498db",
-        "#95a5a6"
+        "#0094e0", 
+        "#18c97e", 
+        "#CC54B3"
       ],
       data: [37,22,42]
     }]
@@ -61,24 +61,24 @@ function randomize(selectObject) {
         labels: [1970,1971,1972,1973,1974,1975,1976,1977,1978,1979,1980,1981,1982,1983,1984,1985,1986,1987,1988,1989,1990,1991,1992,1993,1994,1995,1996,1997,1998,1999,2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018],
         datasets: [{
           label: 'Humanities',
-          backgroundColor: "#2ecc71",
-          borderColor: "#2ecc71",
+          backgroundColor: "#0094e0",
+          borderColor: "#0094e0",
           data: [
             16,9,9,22,49,49,21,30,25,35,33,29,52,30,20,20,20,26,31,26,37,50,37,44,57,37,39,48,56,44,41,60,38,50,44,49,51,55,71,59,49,53,64,51,45,68,49,45,54
           ],
           fill: false,
         }, {
           label: 'Natural Sciences',
-          backgroundColor: "#3498db",
-          borderColor: "#3498db",
+          backgroundColor: "#18c97e",
+          borderColor: "#18c97e",
           fill: false,
           data: [
             7,5,7,13,29,33,11,30,19,21,28,27,27,27,15,15,15,25,23,24,22,23,22,16,23,21,25,30,31,39,29,40,36,34,26,29,25,30,37,36,34,44,36,48,38,33,59,59,60
           ],
         },{
           label: 'Social Sciences',
-          backgroundColor: "#95a5a6",
-          borderColor: "#95a5a6",
+          backgroundColor: "#CC54B3",
+          borderColor: "#CC54B3",
           fill: false,
           data: [
             3,4,9,32,44,90,25,35,34,18,30,30,29,27,22,19,18,35,31,27,42,51,48,46,31,44,45,45,42,55,54,74,48,56,72,48,55,62,59,65,70,71,79,100,61,75,64,60,66

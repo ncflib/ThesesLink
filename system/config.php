@@ -1,20 +1,20 @@
 <?php
 
-$host = "localhost";
-$username = "medim_library";
-$password = "%&fs~u)WU.we";
-$database = "medim_library";
+$dsn = 'mysql:dbname=;host=localhost';
+$user = '';
+$password = '';
+
+try 
+{
+    $db = new PDO($dsn, $user, $password);
+    $db -> exec("SET CHARACTER SET utf8");
 
 
-$connect = mysql_connect($host, $username, $password);
-mysql_select_db($database);
-mysql_query("SET NAMES UTF8");
-if(!$connect) {
-	echo "Couldn't connect to the database.";
-	exit();
 }
-
-
-
+catch( PDOException $Exception ) 
+{   
+     echo "Unable to connect to database.";
+     exit;
+}
 
 ?>
