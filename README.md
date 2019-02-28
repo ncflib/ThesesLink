@@ -18,6 +18,9 @@ There were a lot of "small AOCs" that are not actually considered as AOCs but ma
 
 **ThesisLink** uses PHP and Python in the backend and HTML, CSS and Javascript with Jquery and D3 libraries in the frontend. D3.js is a powerful Javascript library that brings data to life using HTML, SVG, and CSS and heavily used in the simulation page. Python script is used to scrape theses data from the original digital collection website ( http://ncf.sobek.ufl.edu/theses ) and can be run in any machine that Python is installed.
 
+## Future Work
+
+ThesisLink is helping New College of Florida students, with New College of Florida data. In the future, we want other schools to be able to import their data easily and get an immediate result from ThesisLink. 
 
 ## Building
 
