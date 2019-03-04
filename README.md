@@ -1,4 +1,4 @@
-# ThesisLink ###v2
+# ThesisLink
 
 ThesisLink is a web application that visualizes over 50 years of metadata from undergraduate theses by New College of Florida students. It presents users with the following alternative: to view undergraduate theses as objects that are associated to each other via what we call "intellectual links," rather than as objects sitting independently in a repository.
 
