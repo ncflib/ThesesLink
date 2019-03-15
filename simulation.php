@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ThesesLink</title>
-    <link href="assets/style.css?id=<?php echo rand(100,500000); ?>" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -19,7 +19,7 @@
         <div class="row" style="padding-top:10px; padding-bottom:15px; min-height:100%; height:100%">
             <div class="col-lg-8">
                 <div id="mapDiv" height="550" width="100%">
-                    <div class="divisionText" id="divisionText" style="float:left; position:absolute;">
+                    <div class="goBackText" id="goBackText" style="float:left; position:absolute;">
                         <button type="button" class="btn btn-primary" class="alldivisionButton" style="margin-top:5px;">
                             <- Go Back</button> </div> <div class="list" style="margin:auto;" style="float:left;">
                                 <center>
@@ -87,8 +87,9 @@
         </div>
     </footer>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="js/main.js?id=<?php echo rand(100,500000); ?>"></script>
+<script src="js/jquery.js"></script>
+<script src="js/d3.js"></script>
+<script src="js/main.js"></script>
+
 
 </html>

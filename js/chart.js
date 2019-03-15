@@ -51,7 +51,7 @@ function randomize(selectObject) {
   });
   
   chart.update();
-  }, 100); 
+  }, 40); 
 }
 
 

@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 include('system/config.php');
 ?>
 <!DOCTYPE>
@@ -11,7 +8,7 @@ include('system/config.php');
 <head>
     <title>ThesisLink</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="assets/style.css?id=<?php echo rand(100,500000); ?>" rel="stylesheet">
+    <link href="assets/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -151,11 +148,11 @@ include('system/config.php');
         </div>
     </footer>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="js/main.js?id=<?php echo rand(100,500000); ?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/d3.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chartBundle.js"></script>
 <script src="js/chartjs-plugin-labels.min.js"></script>
-<script src="js/chart.js?id=<?php echo rand(); ?>"></script>
+<script src="js/chart.js"></script>
 
 </html>
