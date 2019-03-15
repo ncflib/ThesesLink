@@ -11003,7 +11003,7 @@ text {
   border:1px solid gray;
 }
 
-.divisionText {
+.goBackText {
   padding:0 0 0 5px;
   font-size:22px;
   color:blue;
@@ -11034,14 +11034,17 @@ textarea {
 
 @media (max-width: 768px) {
 
-
 .navbar-brand { font-size:17px; }
 
 .container { width: 100%; }
 
 #nodeTitle { padding-top:50px; }
 
+#searchAoc { padding-top:30px; }
+
 .alldivisionButton { margin:auto; margin-top:5px; }
+
+footer { display:none; }
 
 }
 
@@ -11148,4 +11151,4 @@ textarea {
       100% { transform: rotate(360deg); }
     }
 
-
+    @media (min-width:1025px) { .container { width: 75% !important;} .contSimulation { width:90% !important; } }
