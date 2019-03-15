@@ -4,18 +4,18 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Theses Dashboard</title>
+    <title>ThesesLink</title>
     <link href="assets/style.css?id=<?php echo rand(100,500000); ?>" rel="stylesheet">
 </head>
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Library Theses</a>
+        <div class="container contSimulation">
+            <a class="navbar-brand" href="#">ThesisLink</a>
             <a class="btn btn-primary" href="index.php">Go to landing page</a>
         </div>
     </nav>
-    <div class="container">
+    <div class="container contSimulation">
         <div class="row" style="padding-top:10px; padding-bottom:15px; min-height:100%; height:100%">
             <div class="col-lg-8">
                 <div id="mapDiv" height="550" width="100%">

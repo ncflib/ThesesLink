@@ -16,14 +16,17 @@ include('system/config.php');
 
 <body>
     <nav class="navbar navbar-light bg-light static-top" style="height:70px">
-        <div class="container">
+        <div class="container contSimulation">
             <a class="navbar-brand" href="#">ThesisLink</a>
+            <div style="float:right;">
+            <a class="btn btn-primary" href="https://github.com/ncflib/ThesesLink" target="_BLANK">Github</a>
             <a class="btn btn-primary" href="simulation.php">Get started</a>
+            </div>
         </div>
     </nav>
     <div class="container">
         <div class="row" style="padding-top:15px">
-            <div class="col-md-12 mb-12">
+            <div class="col-md-12" >
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Welcome</h2>
@@ -34,13 +37,13 @@ include('system/config.php');
                     </div>
                 </div>
             </div>
-        </div>
+        </div>        
         <div class="row" style="padding-top:20px; padding-bottom:20px;">
-            <div class="col-md-6 mb-6">
+            <div class="col-md-12 mb-12">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Yearly Distributions</h2>
-                        <p class="card-text"><canvas id="myChart" height="200"></canvas>
+                        <p class="card-text"><canvas id="myChart"></canvas>
                             <center>
                                 <h2>Year</h2>
                                 <input type="range" name="doughnut" id="doughnut" value="1990" min="1970" max="2018" oninput="randomize(this)" onChange="randomize(this)">
@@ -56,7 +59,9 @@ include('system/config.php');
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-6">
+          </div>
+          <div class="row" style="padding-top:20px; padding-bottom:20px;">
+            <div class="col-md-12 mb-12 center-block">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Card Two</h2>
@@ -69,8 +74,8 @@ include('system/config.php');
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top:10px; padding-bottom:20px;">
-            <div class="col-md-6 mb-6">
+                <div class="row" style="padding-top:20px; padding-bottom:20px;">
+            <div class="col-md-12 mb-12 center-block">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">Card Three</h2>
@@ -82,7 +87,9 @@ include('system/config.php');
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 mb-6">
+          </div>
+        <div class="row">
+            <div class="col-md-12 mb-12 center-block">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title">AOC</h2>
@@ -132,7 +139,7 @@ include('system/config.php');
                         5800 Bay Shore Road <br />
                         Sarasota, FL 34243 <br />
                         (941) 487-5000 <br />
-                        © 2019 <br />
+                        © 2019 <a href="example.html">asdasd</a><br />
                     </p>
                 </div>
                 <div class="col-lg-2">

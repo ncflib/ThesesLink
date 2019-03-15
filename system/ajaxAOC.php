@@ -42,7 +42,7 @@ else
 {
 	$query = $db->query("SELECT thesis FROM aocs WHERE aoc = '" . trim($get_aocname) . "' ", PDO::FETCH_ASSOC);
 }
-
+$i = 0;
 foreach ( $query as $data )
 {
 	$veri = $db -> query("SELECT * FROM theses WHERE id = '" . $data['thesis'] . "'")->fetch(PDO::FETCH_ASSOC);
@@ -68,6 +68,7 @@ foreach ( $query as $data )
 
 		if ($querynewsize > $limiter)
 		{
+			$i++;
 ?>
 	 <tr>
 	      <td onClick="getDetail(<?php echo $veri['id']; ?>);" style="cursor: pointer"><?php
@@ -85,12 +86,21 @@ foreach ( $query as $data )
 	// Humanities 0
 	// Social 2
 
-	$i++;
-}
+	
 
+}
 ?>
 </tbody>
 </table>
+<?php
+if($i == 0) 
+{
+	?>
+	<h2>No thesis found. Please change your multidisciplinary option.</h2>
+	<?php
+}
+?>
+
 </div>
 <?php
 $ch = fopen($cachedosyasi, 'w');

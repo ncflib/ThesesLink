@@ -1,5 +1,4 @@
 # ThesisLink
-v2
 
 ThesisLink is a web application that visualizes over 50 years of metadata from undergraduate theses by New College of Florida students. It presents users with the following alternative: to view undergraduate theses as objects that are associated to each other via what we call "intellectual links," rather than as objects sitting independently in a repository.
 
@@ -15,7 +14,7 @@ ThesisLink visualizes the relationship between theses, divisions, and AOCs ( wha
 
 There were many "small AOCs" that are not actually considered as AOCs but maybe topics added in the data. When showing AOCs, we had to limit the number of AOCs by eliminating the ones that have less than 10 theses (otherwise the visualization would be a complete mess). This gave us a clean list of AOCs to list under divisions. You will still see these "small AOCs" as related AOCs when you dive into an AOC.
 
-![Screenshot](assets/screenshot.png)
+![Screenshot](assets/screenshot2.jpeg)
 
 ## Future Work
 

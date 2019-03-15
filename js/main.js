@@ -1,18 +1,20 @@
-var radius = [30, 10, 4, 10];
-var colors = ["#0094e0", "#18c97e", "#CC54B3"];
-var clicked = 0;
-var states = []; 
-// humanities, natural sciences, social sciences.
-var currentState = [0, 0, 0, 0, 0];
-updateDivision(3);
-$('#multi').change(function() {
+
+var radius = [30, 10, 4]; // Radius values for node types. Divisions, AOCs and theses respectively.
+var colors = ["#0094e0", "#18c97e", "#CC54B3"]; // Node colors for divisions. Humanities, natural sciences, social sciences respectively.
+var colorsAOC = ["#59b7e0", "#8fc9ac", "#cc7fc0"]; // Node colors for AOCs. Humanities, natural sciences, social sciences respectively.
+var states = []; // Queue for states. States include : Type ( 0 = All divisions ( main ), 1 = Division, 2 = AOC), Group (Division name or AOC name), Minimum Year, Maximum Year, Multidisciplinary Option 
+var multivalue = 0; // Variable for multidisciplinary option. Defult = 0
+var currentState = [0, 0, 0, 0, 0]; // Setting currentState to all 0s to start with "All Division" map.
+var divisionNames = ["Humanities", "Natural Sciences", "Social Sciences", "All Divisions"];
+updateDivision(3); // There is no division 3, it is defined 3 to get all divisions. Division ids are 0,1,2 for humanities, natural sciences, social sciences respestively.
+
+$('#multi').change(function() { // Everytime the multidisciplinary option changes, the map should be updated.
     multivalue = $("#multi").prop('checked');
     if (multivalue) {
         multivalue = 1;
     } else {
         multivalue = 0;
     }
-
     if (currentState[0] == 1) {
         updateAoc(currentState[1], currentState[2], currentState[3], $("#multi").prop('checked'));
     }
@@ -21,35 +23,35 @@ $('#multi').change(function() {
     }
 });
 
-$("#searchAoc").submit(function(event) {
+$("#searchAoc").submit(function(event) { // Handles the search bar.
     if( $("#search").val().length > 2) {
     updateSearch($("#search").val(), 1900, 2020, $("#multi").prop('checked'));
     } 
     event.preventDefault();
 });
-$('#doSearch').click(function() {
+
+$('#doSearch').click(function() { // Handles the search bar again, in a bad way. Couldn't find another solution to handle clicking the button.
     if( $("#search").val().length > 2) {
     updateSearch($("#search").val(), 1900, 2020, $("#multi").prop('checked'));
     } 
     event.preventDefault();
 });
-$('#gobackList').click(function() {
+
+$('#gobackList').click(function() { // Recolors the nodes and gets the theses list for the AOC in the right panel.
     d3.select("svg").selectAll("circle")
       .attr("fill", circleColour);
     goBackAoc();
     $('#gobackList').hide();
 });
-$('#divisionText').click(function() {
-    // Take the latest state from the list
-    console.log(states); 
+
+$('#goBackText').click(function() { // Goes back to the previous state.
     states.pop(); 
     latestState = states[states.length-1][0];
-    console.log(latestState)
-    states.pop();
+    console.log(latestState);
     if (latestState[0] == 0) { 
         updateDivision(latestState[1]);
         $("#divCharts").html();
-        $("#category").html("All Divisions");
+        $("#category").html(divisionNames[latestState[1]]);
     }
     if (latestState[0] == 1) {
         updateAoc(latestState[1], latestState[2], latestState[3], latestState[4]);
@@ -62,16 +64,18 @@ $('#divisionText').click(function() {
     $('#gobackList').hide();
     }
     $('#detailedName').html("&nbsp;");
+
+    states.pop();
 });
 
-$(document).ready(function() {
+$(document).ready(function() { // Handles the browsers' go-back button.
     window.history.pushState(null, "", window.location.href);
     window.onpopstate = function() {
         window.history.pushState(null, "", window.location.href);
     };
 });
 
-function goBackAoc() {
+function goBackAoc() { // Takes theses list for AOC.
   $.ajax({
         url: "system/ajaxAOC.php?id=" + currentState[1] + "&year=" + currentState[2] + "&year2=" + currentState[3] + "&multi=" + currentState[4],
         type: "POST",
@@ -83,8 +87,7 @@ function goBackAoc() {
         });
 }
 
-function getDetail(id) {
-
+function getDetail(id) { // Gets thesis detail.
     $.ajax({
         url: "system/ajaxDetail.php?id=" + id,
         type: "POST",
@@ -95,13 +98,13 @@ function getDetail(id) {
         },
         contentType: "application/x-www-form-urlencoded;charset=UTF-8",
     });
-
-
 }
-function addState(state) {
+
+function addState(state) { // Adds state to the states queue.
     states.push(state);
 }
-function updateDivision(group) {
+
+function updateDivision(group) { // Updates the map with a division with id "group". If 3, shows all divisions.
 
     nodes_data2 = new Array();
     links_data2 = new Array();
@@ -114,11 +117,11 @@ function updateDivision(group) {
             drawGraph(nodes_data2, links_data2,0);
 
             if (group != 3) {
-                $("#divisionText").show();
+                $("#goBackText").show(); 
                 currentState = [0, group, 0, 0, 0];
                 addState([currentState]);
             } else {
-                $("#divisionText").hide();
+                $("#goBackText").hide(); 
                 currentState = [0, group, 0, 0, 0];
                 addState([currentState]);
             }
@@ -128,7 +131,7 @@ function updateDivision(group) {
 
 }
 
-function updateAoc(group, year, year2, multivalue) {
+function updateAoc(group, year, year2, multivalue) { // Updates the map with an AOC with all the related AOCs.
     $("#map").hide();
     $("#loading").show();
     nodes_data2 = new Array();
@@ -153,7 +156,7 @@ function updateAoc(group, year, year2, multivalue) {
                     drawGraph(nodes_data2, links_data2,1);
                     currentState = [1, group, year, year2, multivalue];
                     addState([currentState]);
-                    $("#divisionText").show();
+                    $("#goBackText").show();
                     $("#category").html(group);
                     $("#nodeTitle").html("List of theses");
                     $("#divCharts").html(msg2);
@@ -168,7 +171,7 @@ function updateAoc(group, year, year2, multivalue) {
 
 }
 
-function updateSearch(group, year, year2, multivalue) {
+function updateSearch(group, year, year2, multivalue) { // Updates the map with all the AOCs that have the searched text in them and their related AOCs.
     $("#map").hide();
     $("#loading").show();
     nodes_data2 = new Array();
@@ -189,7 +192,7 @@ function updateSearch(group, year, year2, multivalue) {
                     nodes_data2 = msg[0];
                     links_data2 = msg[1];
                     drawGraph(nodes_data2, links_data2,1);
-                    $("#divisionText").show();
+                    $("#goBackText").show();
                     $("#category").html("Search: " + group);
                     currentState = [2, group, year, year2, multivalue];
                     addState([currentState]);
@@ -207,13 +210,12 @@ function updateSearch(group, year, year2, multivalue) {
 
 }
 
-function drawGraph(nodes_data, links_data, currents) {
+function drawGraph(nodes_data, links_data, currents) { // D3.JS stuff.
     var svg = d3.select("svg"),
         width = $("#map").width(),
         height = +$("#map").height();
 
     svg.selectAll("*").remove();
-    //set up the simulation 
     var simulation = d3.forceSimulation()
         //add nodes
         .nodes(nodes_data);
@@ -350,7 +352,6 @@ function drawGraph(nodes_data, links_data, currents) {
                 $('circle').not('circle[wcol=1]').attr('fill','#dbdbdb');
                 $('circle').attr('wcol','0');
                 $('circle[node-id="' + d.id + '"]').attr('fill','black');
-                clicked = 1;
                 getDetail(d.id);
 
             }
@@ -474,7 +475,9 @@ function drawGraph(nodes_data, links_data, currents) {
       function circleColour(d) {
           if (d.type == "2") {
               return "black";
-          } else {
+          } else if(d.type == "1") {
+                return colorsAOC[d.group];
+            } else {
               return colors[d.group];
           }
       }
